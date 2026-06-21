@@ -1,5 +1,9 @@
 # Footprint Pulse 🌍
 
+## 🚀 Live Demo
+**https://footprint-pulse-864461954747.asia-south1.run.app**
+
+
 A carbon-awareness dashboard that lets users log daily transport, food, and energy actions, see their real-world CO₂ impact as relatable nudges, and receive AI-powered weekly reduction advice.
 
 ---

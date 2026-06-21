@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Footprint Pulse: Understand, track, and instantly reduce your carbon footprint with real-world comparisons and live Earth feedback.">
+    <title>Footprint Pulse — Carbon Awareness Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.354.0/lucide.min.js" defer></script>
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <i data-lucide="globe-2" class="logo-icon" aria-hidden="true"></i>
+                <h1>Footprint Pulse</h1>
+            </div>
+            <p class="tagline">See the real-world impact of every choice, instantly. Track, learn, and heal.</p>
+        </div>
+    </header>
+
+    <main class="dashboard-grid">
+        <!-- LEFT COLUMN: Action Logging and Nudge -->
+        <section class="card action-section" aria-labelledby="logging-title">
+            <h2 id="logging-title" class="section-title">
+                <i data-lucide="plus-circle" class="title-icon" aria-hidden="true"></i> Log Daily Action
+            </h2>
+            <p class="section-description">Tap any action button below to instantly record your choice and see its carbon equivalence.</p>
+            
+            <div class="action-categories">
+                <!-- Transport Category -->
+                <div class="category-group" role="group" aria-labelledby="cat-transport">
+                    <h3 id="cat-transport" class="category-title">
+                        <i data-lucide="car" class="cat-icon" aria-hidden="true"></i> Transport
+                    </h3>
+                    <div class="btn-grid">
+                        <button class="log-btn" data-category="transport" data-type="walk" data-amount="2" data-unit="km" aria-label="Log walking or biking for 2 kilometers">
+                            <i data-lucide="footprints" aria-hidden="true"></i> Walk/Bike <span class="btn-sub">2 km</span>
+                        </button>
+                        <button class="log-btn" data-category="transport" data-type="bus" data-amount="10" data-unit="km" aria-label="Log a bus trip for 10 kilometers">
+                            <i data-lucide="bus" aria-hidden="true"></i> Bus Ride <span class="btn-sub">10 km</span>
+                        </button>
+                        <button class="log-btn" data-category="transport" data-type="metro" data-amount="15" data-unit="km" aria-label="Log a metro trip for 15 kilometers">
+                            <i data-lucide="train" aria-hidden="true"></i> Metro <span class="btn-sub">15 km</span>
+                        </button>
+                        <button class="log-btn" data-category="transport" data-type="car" data-amount="15" data-unit="km" aria-label="Log a car ride for 15 kilometers">
+                            <i data-lucide="car" aria-hidden="true"></i> Car Ride <span class="btn-sub">15 km</span>
+                        </button>
+                        <button class="log-btn" data-category="transport" data-type="flight" data-amount="1" data-unit="hours" aria-label="Log a short-haul flight of 1 hour">
+                            <i data-lucide="plane" aria-hidden="true"></i> Flight <span class="btn-sub">1 hr</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Food Category -->
+                <div class="category-group" role="group" aria-labelledby="cat-food">
+                    <h3 id="cat-food" class="category-title">
+                        <i data-lucide="utensils" class="cat-icon" aria-hidden="true"></i> Food
+                    </h3>
+                    <div class="btn-grid">
+                        <button class="log-btn" data-category="food" data-type="veg" data-amount="1" data-unit="meals" aria-label="Log a plant-based or vegetarian meal">
+                            <i data-lucide="leaf" aria-hidden="true"></i> Veg Meal <span class="btn-sub">Plant-based</span>
+                        </button>
+                        <button class="log-btn" data-category="food" data-type="mixed" data-amount="1" data-unit="meals" aria-label="Log a mixed meal containing vegetables and some meat">
+                            <i data-lucide="salad" aria-hidden="true"></i> Mixed Meal <span class="btn-sub">Balanced</span>
+                        </button>
+                        <button class="log-btn" data-category="food" data-type="meat-heavy" data-amount="1" data-unit="meals" aria-label="Log a meat-heavy meal">
+                            <i data-lucide="beef" aria-hidden="true"></i> Meat-heavy <span class="btn-sub">High impact</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Energy Category -->
+                <div class="category-group" role="group" aria-labelledby="cat-energy">
+                    <h3 id="cat-energy" class="category-title">
+                        <i data-lucide="zap" class="cat-icon" aria-hidden="true"></i> Household Energy
+                    </h3>
+                    <div class="btn-grid">
+                        <button class="log-btn" data-category="energy" data-type="ac" data-amount="2" data-unit="hours" aria-label="Log air conditioning usage for 2 hours">
+                            <i data-lucide="snowflake" aria-hidden="true"></i> AC <span class="btn-sub">2 hrs</span>
+                        </button>
+                        <button class="log-btn" data-category="energy" data-type="appliance" data-amount="1" data-unit="hours" aria-label="Log household appliance usage for 1 hour">
+                            <i data-lucide="tv" aria-hidden="true"></i> Appliance <span class="btn-sub">1 hr</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instant Nudge Area -->
+            <div class="nudge-container" aria-live="polite">
+                <h3 class="nudge-header">
+                    <i data-lucide="sparkles" class="nudge-icon" aria-hidden="true"></i> Real-time Impact Nudge
+                </h3>
+                <p id="nudge-text" class="nudge-body">Tap any button above to see how your carbon footprint translates to relatable daily scenarios.</p>
+            </div>
+            
+            <!-- Visually Hidden ARIA Live Region for Screen Readers -->
+            <div id="sr-nudge-live" class="sr-only" aria-live="polite"></div>
+        </section>
+
+        <!-- RIGHT COLUMN: Earth Health & Weekly Insight -->
+        <div class="right-column-stack">
+            <!-- Earth Health Indicator -->
+            <section class="card earth-health-section" aria-labelledby="earth-title">
+                <h2 id="earth-title" class="section-title">
+                    <i data-lucide="heart" class="title-icon" aria-hidden="true"></i> Earth Health Status
+                </h2>
+                
+                <div class="earth-visual-container">
+                    <canvas id="earth-canvas" width="280" height="280" aria-label="A procedurally animated representation of Earth shifting colors and atmospheres depending on carbon habits."></canvas>
+                    <div class="earth-glow"></div>
+                </div>
+
+                <div class="health-metrics">
+                    <div class="metric-row">
+                        <span class="metric-label">Atmospheric State:</span>
+                        <strong id="earth-health-text" class="metric-value health-excellent">Vibrant & Clean</strong>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Activity Streak:</span>
+                        <strong id="streak-text" class="metric-value">Balanced Commences</strong>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Total CO₂ Logged:</span>
+                        <strong id="total-co2-text" class="metric-value">0.00 kg</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Weekly Insight Card -->
+            <section class="card insight-section" aria-labelledby="insight-title">
+                <h2 id="insight-title" class="section-title">
+                    <i data-lucide="lightbulb" class="title-icon" aria-hidden="true"></i> Weekly Reduction Lever
+                </h2>
+                <div id="insight-content" class="insight-body">
+                    <p>Loading carbon reduction insights based on your logged habits...</p>
+                </div>
+                <div class="insight-footer">
+                    <span class="insight-source">Source: <span id="insight-source-text">Analyzing...</span></span>
+                    <div style="display:flex;gap:0.5rem;align-items:center;">
+                        <select id="translate-lang" class="icon-btn" aria-label="Select language for translation" style="font-size:0.8rem;padding:0.3rem;">
+                            <option value="hi">Hindi</option>
+                            <option value="ta">Tamil</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                        </select>
+                        <button id="translate-insight-btn" class="icon-btn" aria-label="Translate weekly insight" style="display:none;" title="Translate insight">
+                            <i data-lucide="languages" aria-hidden="true"></i>
+                        </button>
+                        <button id="refresh-insight-btn" class="icon-btn" aria-label="Refresh weekly insight recommendation">
+                            <i data-lucide="refresh-cw" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- BOTTOM ROW: Logged History -->
+    <section class="card history-section" aria-labelledby="history-title">
+        <div class="history-header">
+            <h2 id="history-title" class="section-title">
+                <i data-lucide="history" class="title-icon" aria-hidden="true"></i> Action History
+            </h2>
+            <button id="clear-history-btn" class="danger-btn" aria-label="Clear all logged actions">
+                <i data-lucide="trash-2" aria-hidden="true"></i> Clear History
+            </button>
+        </div>
+        <div class="table-container">
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Time</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Action</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">CO₂ (kg)</th>
+                        <th scope="col">Impact Statement</th>
+                    </tr>
+                </thead>
+                <tbody id="history-table-body">
+                    <tr>
+                        <td colspan="6" class="empty-table-msg">No actions logged yet. Your carbon history will appear here.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer class="app-footer">
+        <p>Footprint Pulse © 2026. Made with care for the planet. Calculations are illustrative averages sourced from EPA and IPCC datasets.</p>
+    </footer>
+
+    <!-- App Scripts -->
+    <script src="/static/js/earth.js" defer></script>
+    <script src="/static/js/app.js" defer></script>
+</body>
+</html>

@@ -5,15 +5,15 @@ and the ActionRepository implementing the repository pattern for thread-safe
 in-memory storage of logged actions.
 """
 
+import threading
 from dataclasses import dataclass
 from datetime import datetime
-import threading
-from typing import List, Dict, Any
+from typing import Any
 
 
 @dataclass
 class Action:
-    """Dataclass representing a logged action.
+    """Dataclass representing a logged carbon action.
 
     Attributes:
         id: Unique identifier for the action.
@@ -35,11 +35,12 @@ class Action:
     nudge: str
     timestamp: datetime
 
-    def to_dict(self) -> Dict[str, Any]:
-        """Converts the Action instance to a dictionary.
+    def to_dict(self) -> dict[str, Any]:
+        """Converts the Action instance to a serialisable dictionary.
 
         Returns:
-            A dictionary representation of the Action.
+            A dictionary representation of the Action with timestamp as ISO
+            format string.
         """
         return {
             "id": self.id,
@@ -57,8 +58,8 @@ class ActionRepository:
     """Thread-safe in-memory repository for storing Actions."""
 
     def __init__(self) -> None:
-        """Initializes the repository with an empty list and a lock."""
-        self._actions: List[Action] = []
+        """Initialises the repository with an empty list and a threading lock."""
+        self._actions: list[Action] = []
         self._lock: threading.Lock = threading.Lock()
 
     def add(self, action: Action) -> Action:
@@ -74,11 +75,11 @@ class ActionRepository:
             self._actions.append(action)
             return action
 
-    def get_all(self) -> List[Action]:
+    def get_all(self) -> list[Action]:
         """Retrieves all logged actions, sorted by timestamp descending.
 
         Returns:
-            A list of all stored Actions.
+            A list of all stored Actions ordered newest-first.
         """
         with self._lock:
             return sorted(self._actions, key=lambda a: a.timestamp, reverse=True)
@@ -89,7 +90,7 @@ class ActionRepository:
             self._actions.clear()
 
     def get_total_co2(self) -> float:
-        """Calculates the total CO2 emissions of all logged actions.
+        """Calculates the total CO2 emissions across all logged actions.
 
         Returns:
             Total CO2 in kilograms.
@@ -97,14 +98,16 @@ class ActionRepository:
         with self._lock:
             return sum(action.co2_kg for action in self._actions)
 
-    def get_category_totals(self) -> Dict[str, float]:
+    def get_category_totals(self) -> dict[str, float]:
         """Calculates total CO2 emissions aggregated by category.
 
         Returns:
-            A dictionary mapping category name to CO2 emissions in kg.
+            A dictionary mapping category name to total CO2 emissions in kg.
+            Always contains keys 'transport', 'food', and 'energy'; unknown
+            categories are added dynamically.
         """
         with self._lock:
-            totals: Dict[str, float] = {
+            totals: dict[str, float] = {
                 "transport": 0.0,
                 "food": 0.0,
                 "energy": 0.0,

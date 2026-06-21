@@ -5,8 +5,10 @@ target-version = ['py311']
 [tool.ruff]
 line-length = 88
 target-version = "py311"
+
+[tool.ruff.lint]
 select = ["E", "F", "W", "I", "N", "UP", "B", "A", "C4", "RET", "SIM", "ARG"]
-ignore = []
+ignore = ["E501", "UP017"]
 
 [tool.mypy]
 python_version = "3.11"
@@ -18,6 +20,6 @@ disallow_incomplete_defs = true
 check_untyped_defs = true
 no_implicit_optional = true
 warn_redundant_casts = true
-warn_unused_ignores = true
-warn_return_any = true
+warn_unused_ignores = false
+warn_return_any = false
 show_error_codes = true

@@ -5,7 +5,6 @@ ensuring security, proper environment variable handling, and testing overrides.
 """
 
 import os
-from typing import Type
 
 
 class Config:
@@ -33,21 +32,21 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    """Configuration class for the production environment."""
+    """Configuration class for the production environment.
 
-    # Production-specific settings can go here.
-    # Talisman and other secure setups will rely on this environment.
-    pass
+    Production-specific settings can go here.
+    Talisman and other secure setups will rely on this environment.
+    """
 
 
-config_by_name: dict[str, Type[Config]] = {
+config_by_name: dict[str, type[Config]] = {
     "development": DevelopmentConfig,
     "testing": TestingConfig,
     "production": ProductionConfig,
 }
 
 
-def get_config(env_name: str) -> Type[Config]:
+def get_config(env_name: str) -> type[Config]:
     """Retrieves the configuration class based on the environment name.
 
     Args:

@@ -5,7 +5,7 @@ profile and target daily carbon budgets.
 """
 
 from dataclasses import dataclass
-from typing import Dict, Any
+from typing import Any
 
 
 @dataclass
@@ -22,7 +22,7 @@ class User:
     name: str
     daily_target_co2: float
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Converts the User instance to a dictionary.
 
         Returns:

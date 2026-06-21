@@ -1,9 +1,14 @@
-"""Flask application factory module."""
+"""Flask application factory module.
+
+This module initializes the Flask app instance, loads environment configs,
+registers blueprints, configures logging, and sets up security features.
+"""
 
 import logging
 import os
+
 from flask import Flask, render_template
-from config import get_config
+
 from app.services.firestore_repository import FirestoreRepository
 from app.services.gemini_service import GeminiService
 from app.utils.security import init_security
@@ -20,6 +25,16 @@ logger = logging.getLogger(__name__)
 
 
 def create_app(config_name: str | None = None) -> Flask:
+    """Creates and configures a Flask application instance.
+
+    Args:
+        config_name: The name of the environment config (development, testing,
+            production). If None, defaults to the FLASK_ENV env var or
+            'development'.
+
+    Returns:
+        The configured Flask application instance.
+    """
     app = Flask(__name__)
 
     if not config_name:
@@ -32,8 +47,8 @@ def create_app(config_name: str | None = None) -> Flask:
 
     init_security(app)
 
-    # Initialize Cloud Logging (best-effort)
     from app.services.cloud_logging import init_cloud_logging
+
     init_cloud_logging()
 
     global gemini_service
@@ -41,6 +56,11 @@ def create_app(config_name: str | None = None) -> Flask:
 
     @app.route("/")
     def index() -> str:
+        """Serves the single-page application frontend.
+
+        Returns:
+            The rendered HTML template for the frontend.
+        """
         return render_template("index.html")
 
     from app.routes.actions import actions_bp
@@ -54,3 +74,7 @@ def create_app(config_name: str | None = None) -> Flask:
     app.register_blueprint(translate_bp)
 
     return app
+
+
+# Deferred import to avoid circular reference at module level
+from config import get_config  # noqa: E402

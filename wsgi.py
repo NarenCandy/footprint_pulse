@@ -4,8 +4,9 @@ This script instantiates the Flask application using the factory function
 and starts a development server if run directly.
 """
 
-from app import create_app
 from flask import Flask
+
+from app import create_app
 
 app: Flask = create_app()
 
